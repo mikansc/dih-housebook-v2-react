@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.styles.css";
+import { Header } from "./components/Header";
 
-function App() {
+import LogoHousebook from "./assets/img/housebooklogo.png";
+import React, { useEffect, useState } from "react";
+import { Card } from "./components/Card";
+import fetchAlunos from "./services/api/http-api";
+
+const App = () => {
+  const [alunos, setAlunos] = useState([]);
+
+  useEffect(() => {
+    fetchAlunos().then(setAlunos);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header logo={LogoHousebook} />
+      <main className="container">
+        <div class="cards">
+          {alunos.map(({ nome, avatar, bio, profissao }) => (
+            <Card nome={nome} avatar={avatar} bio={bio} profissao={profissao} />
+          ))}
+        </div>
+      </main>
+    </>
   );
-}
+};
 
 export default App;
