@@ -18,8 +18,8 @@ const App = () => {
       <Header logo={LogoHousebook} />
       <main className="container">
         <div class="cards">
-          {alunos.map(({ nome, avatar, bio, profissao }) => (
-            <Card nome={nome} avatar={avatar} bio={bio} profissao={profissao} />
+          {alunos.map(({ nome, avatar, bio, profissao }, index) => (
+            <Card key={index} nome={nome} avatar={avatar} bio={bio} profissao={profissao} />
           ))}
         </div>
       </main>
